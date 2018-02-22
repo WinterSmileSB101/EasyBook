@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ncx xmlns:xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+    <meta content="" name="dtb:uid"/>
+    <meta content="-1" name="dtb:depth"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>test</text>
+    <text>smileSB101</text>
+  </docTitle>
+  <docAuthor/>
+  <navMap>
+    <navPoint class="level1" id="chapter1.html" playOrder="1">
+      <navLabel>
+        <text>chapter1.html</text>
+      </navLabel>
+      <content src="chapter1.html"/>
+    </navPoint>
+    <navPoint class="level2" id="chapter2.html" playOrder="2">
+      <navLabel>
+        <text>chapter2.html</text>
+      </navLabel>
+      <content src="chapter2.html"/>
+    </navPoint>
+    <navPoint class="level3" id="chapter3.html" playOrder="3">
+      <navLabel>
+        <text>chapter3.html</text>
+      </navLabel>
+      <content src="chapter3.html"/>
+    </navPoint>
+    <navPoint class="level4" id="chapter4.html" playOrder="4">
+      <navLabel>
+        <text>chapter4.html</text>
+      </navLabel>
+      <content src="chapter4.html"/>
+    </navPoint>
+    <navPoint class="level5" id="chapter5.html" playOrder="5">
+      <navLabel>
+        <text>chapter5.html</text>
+      </navLabel>
+      <content src="chapter5.html"/>
+    </navPoint>
+    <navPoint class="level6" id="chapter6.html" playOrder="6">
+      <navLabel>
+        <text>chapter6.html</text>
+      </navLabel>
+      <content src="chapter6.html"/>
+    </navPoint>
+  </navMap>
+</ncx>

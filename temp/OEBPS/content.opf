@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package xmlns:xmlns="http://www.idpf.org/2007/opf" unique-identifier="PrimaryID" version="2.0">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <title>test</title>
+    <creator>smileSB101</creator>
+    <description> </description>
+    <subject> </subject>
+    <contributor> </contributor>
+    <date> </date>
+    <type> </type>
+    <format> </format>
+    <identifier> </identifier>
+    <source> </source>
+    <language> </language>
+    <relation> </relation>
+    <coverage> </coverage>
+    <rights> </rights>
+    <meta content="cover" name="cover"/>
+  </metadata>
+  <manifest>
+    <item href="content.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+    <item href="cover.jpg" id="cover" media-type="image/jpeg"/>
+    <item href="chapter1.html" id="chapter1.html" media-type="application/xhtml+xml"/>
+    <item href="chapter2.html" id="chapter2.html" media-type="application/xhtml+xml"/>
+    <item href="chapter3.html" id="chapter3.html" media-type="application/xhtml+xml"/>
+    <item href="chapter4.html" id="chapter4.html" media-type="application/xhtml+xml"/>
+    <item href="chapter5.html" id="chapter5.html" media-type="application/xhtml+xml"/>
+    <item href="chapter6.html" id="chapter6.html" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="chapter1.html"/>
+    <itemref idref="chapter2.html"/>
+    <itemref idref="chapter3.html"/>
+    <itemref idref="chapter4.html"/>
+    <itemref idref="chapter5.html"/>
+    <itemref idref="chapter6.html"/>
+  </spine>
+</package>
