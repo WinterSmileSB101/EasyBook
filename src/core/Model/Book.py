@@ -20,6 +20,15 @@ class Book:
         self.coverage = coverage
         self.rights = rights
         self.ChapterList = ''
+        self.CoverImage = ''
+        self.CoverImagePath = ''
 
     def setChapterList(self,chapters):
         self.ChapterList = chapters
+
+    def setCoverImageUrl(self,coverImagePath):
+        if not isinstance(coverImagePath,str):
+            raise TypeError('bad operand type of coverImagePath')
+        if len(coverImagePath)>0:
+            self.CoverImagePath = coverImagePath;
+

@@ -11,7 +11,7 @@ class EasyBook(object):
         book.creator = 'smileSB101'
         book.ChapterList = ['asdasd','asdasd','asdasd','asdqwd','gsdfg','tryur']
         structureBuilder = StructureBuilder('',book)
-        fileBuilder = FileBuilder(r'C:\EasyBook\Book','','tesst')
+        fileBuilder = FileBuilder(r'C:\EasyBook\Book','','test')
         structureBuilder.CleanWorkPath()
 
 

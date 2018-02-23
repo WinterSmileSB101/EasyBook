@@ -1,10 +1,24 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+# file structure
+#mimetype
+#META-INF/
+#   container.xml
+#OEBPS/
+#  content.opf
+#  title.html    (可忽略)
+#  content.html  (可忽略)
+#  stylesheet.css
+#  toc.ncx
+#  images/       (可忽略)
+#     cover.png
+
 import os
 from lxml import etree
 
 from src.core.Model.Book import Book
+from src.core.TodaySpider.TodayImageSpider import TodayImage
 
 
 class StructureBuilder(object):
@@ -40,8 +54,10 @@ class StructureBuilder(object):
     def __CreateFile(self):
         self.__CreateMimetype()
         self.__CreateContainer()
+        self.__CreateCoverImage()
         self.__CreateOPF()
         self.__CreateToc()
+        self.__CreateStyleCss()
 
     def __CreateMimetype(self):
         # create mimetype file
@@ -55,6 +71,10 @@ class StructureBuilder(object):
         rootfile = etree.SubElement(rootfiles,'rootfile',attrib={'full-path':'OEBPS/content.opf','media-type':'application/oebps-package+xml'})
         containerTree = etree.ElementTree(container)
         containerTree.write(self.__workPath+r'\META-INF\container.xml', pretty_print=True, xml_declaration=True, encoding='utf-8')
+
+    def __CreateCoverImage(self):
+        todayImage = TodayImage()
+        todayImage.StoreImage(self.__Book.CoverImagePath)
 
     def __CreateOPF(self):
         # create content opf file
@@ -158,6 +178,13 @@ class StructureBuilder(object):
         ncxTree.write(self.__workPath + r'\OEBPS\toc.opf', pretty_print=True, xml_declaration=True,
                           encoding='utf-8')
 
+    def __CreateStyleCss(self):
+        # create stylesheet.css file
+        with open(self.__workPath + '\OEBPS\stylesheet.css', 'w', encoding='utf-8') as f:
+            pass
+
+
+    # public method
     def CleanWorkPath(self):
         for root,dirs,files in os.walk(self.__workPath,topdown=False):
             for name in files:
