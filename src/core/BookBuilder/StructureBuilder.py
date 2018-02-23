@@ -20,10 +20,10 @@ class StructureBuilder(object):
         if isinstance(book, Book):
             self.__Book = book
 
-        self.CreatePath()
-        self.CreateFile()
+        self.__CreatePath()
+        self.__CreateFile()
 
-    def CreatePath(self):
+    def __CreatePath(self):
         # create target path
         if not os.path.exists(self.__targetPath):
             os.makedirs(self.__targetPath)
@@ -37,18 +37,18 @@ class StructureBuilder(object):
         if not os.path.exists(self.__workPath + r'\OEBPS'):
             os.makedirs(self.__workPath + r'\OEBPS')
 
-    def CreateFile(self):
-        self.CreateMimetype()
-        self.CreateContainer()
-        self.CreateOPF()
-        self.CreateToc()
+    def __CreateFile(self):
+        self.__CreateMimetype()
+        self.__CreateContainer()
+        self.__CreateOPF()
+        self.__CreateToc()
 
-    def CreateMimetype(self):
+    def __CreateMimetype(self):
         # create mimetype file
         with open(self.__workPath + '\mimetype', 'w', encoding='utf-8') as f:
             f.write('application/epub+zip')
 
-    def CreateContainer(self):
+    def __CreateContainer(self):
         # create container.xml
         container = etree.Element('container',nsmap={'xmlns':'urn:oasis:names:tc:opendocument:xmlns:container'})
         rootfiles = etree.SubElement(container,'rootfiles')
@@ -56,50 +56,50 @@ class StructureBuilder(object):
         containerTree = etree.ElementTree(container)
         containerTree.write(self.__workPath+r'\META-INF\container.xml', pretty_print=True, xml_declaration=True, encoding='utf-8')
 
-    def CreateOPF(self):
+    def __CreateOPF(self):
         # create content opf file
         package = etree.Element('package',attrib={'version':'2.0','unique-identifier':'PrimaryID'},nsmap={'xmlns':'http://www.idpf.org/2007/opf'})
-        self.CreateMetaData(package)
-        self.CreateManifest(package)
-        self.CreateSpine(package)
+        self.__CreateMetaData(package)
+        self.__CreateManifest(package)
+        self.__CreateSpine(package)
 
         packageTree = etree.ElementTree(package)
         packageTree.write(self.__workPath+r'\OEBPS\content.opf', pretty_print=True, xml_declaration=True, encoding='utf-8')
 
-    def CreateMetaData(self,parentNode):
+    def __CreateMetaData(self,parentNode):
         # create metadata node
         metadata = etree.SubElement(parentNode,'metadata',nsmap={'dc':'http://purl.org/dc/elements/1.1/','opf':'http://www.idpf.org/2007/opf'})
-        title = etree.SubElement(metadata,"title",None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        title = etree.SubElement(metadata,"{http://purl.org/dc/elements/1.1/}title")
         title.text = self.__Book.title
-        creator = etree.SubElement(metadata,'creator',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        creator = etree.SubElement(metadata,'{http://purl.org/dc/elements/1.1/}creator')
         creator.text = self.__Book.creator
-        description = etree.SubElement(metadata, 'description',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        description = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}description')
         description.text = self.__Book.description
-        subject = etree.SubElement(metadata, 'subject',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        subject = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}subject')
         subject.text = self.__Book.subject
-        contributor = etree.SubElement(metadata, 'contributor',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        contributor = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}contributor')
         contributor.text = self.__Book.contributor
-        date = etree.SubElement(metadata, 'date',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        date = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}date')
         date.text = self.__Book.date
-        type = etree.SubElement(metadata, 'type',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        type = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}type')
         type.text = self.__Book.type
-        format = etree.SubElement(metadata, 'format')
+        format = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}format')
         format.text = self.__Book.format
-        identifier = etree.SubElement(metadata, 'identifier',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        identifier = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}identifier')
         identifier.text = self.__Book.identifier
-        source = etree.SubElement(metadata, 'source',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        source = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}source')
         source.text = self.__Book.source
-        language = etree.SubElement(metadata, 'language',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        language = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}language')
         language.text = self.__Book.language
-        relation = etree.SubElement(metadata, 'relation',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        relation = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}relation')
         relation.text = self.__Book.relation
-        coverage = etree.SubElement(metadata, 'coverage',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        coverage = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}coverage')
         coverage.text = self.__Book.coverage
-        rights = etree.SubElement(metadata, 'rights',None,nsmap={'dc':'http://purl.org/dc/elements/1.1/'})
+        rights = etree.SubElement(metadata, '{http://purl.org/dc/elements/1.1/}rights')
         rights.text = self.__Book.rights
         meta = etree.SubElement(metadata, 'meta',attrib={'name':'cover','content':'cover'})
 
-    def CreateManifest(self,parentNode):
+    def __CreateManifest(self,parentNode):
         # create manifest node
         manifest = etree.SubElement(parentNode,'manifest')
         index = 1;
@@ -114,7 +114,7 @@ class StructureBuilder(object):
                                             'media-type':'application/xhtml+xml'})
             index = index+1
 
-    def CreateSpine(self,parentNode):
+    def __CreateSpine(self,parentNode):
         # create spine node
         spine = etree.SubElement(parentNode,'spine',attrib={'toc':'ncx'})
         index = 1;
@@ -123,7 +123,7 @@ class StructureBuilder(object):
                                     attrib={'idref':'chapter{index}.html'.format(index = index)})
             index = index + 1
 
-    def CreateToc(self):
+    def __CreateToc(self):
         # create toc file
         ncx = etree.Element('ncx',attrib={'version':'2005-1'},nsmap={'xmlns':'http://www.daisy.org/z3986/2005/ncx/'})
 
@@ -157,5 +157,13 @@ class StructureBuilder(object):
         ncxTree = etree.ElementTree(ncx)
         ncxTree.write(self.__workPath + r'\OEBPS\toc.opf', pretty_print=True, xml_declaration=True,
                           encoding='utf-8')
+
+    def CleanWorkPath(self):
+        for root,dirs,files in os.walk(self.__workPath,topdown=False):
+            for name in files:
+                os.remove(os.path.join(root,name))
+            for name in dirs:
+                os.rmdir(os.path.join(root,name))
+        os.rmdir(self.__workPath)
 
 
